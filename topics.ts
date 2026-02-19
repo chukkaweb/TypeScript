@@ -421,7 +421,10 @@
 // ```
 
 //  12. Declaration Merging
-// ```ts
+
+// ## What it means
+// If multiple interfaces have the **same name**, TypeScript will **combine them into one interface automatically**.
+
 // interface User {
 //   name: string;
 // }
@@ -434,7 +437,201 @@
 //   name: "Ganesh",
 //   age: 30
 // };
+// Final combined interface becomes:
+
+// ```ts
+// interface User {
+//   name: string;
+//   age: number;
+// }
 // ```
+
+// ✔ TypeScript merges automatically.
+
+
+// ## Real-world example (Angular API)
+// File 1:
+// ```ts
+// interface ApiResponse {
+//   status: number;
+// }
+// ```
+
+// File 2:
+
+// ```ts
+// interface ApiResponse {
+//   data: string;
+// }
+// ```
+
+// Final becomes:
+// ```ts
+// interface ApiResponse {
+//   status: number;
+//   data: string;
+// }
+// ```
+
+// ## Important Rule (Your question case)
+// ❌ This gives error:
+// interface User {
+//   age: number;
+// }
+
+// interface User {
+//   age?: number;
+// }
+// ```
+
+// Error:
+// ```
+// All declarations of 'age' must have identical modifiers
+// ```
+
+// Because one is mandatory and other is optional.
+// ✔ Correct:
+// ```ts
+// interface User {
+//   age?: number;
+// }
+
+// interface User {
+//   name: string;
+// }
+// ```
+
+// Final:
+// ```ts
+// interface User {
+//   age?: number;
+//   name: string;
+// }
+// ```
+
+// ## Why declaration merging is useful
+// In large Angular apps, different modules can extend same interface.
+
+// Example:
+// ```ts
+// // auth module
+// interface User {
+//   name: string;
+// }
+
+// // profile module
+// interface User {
+//   profilePhoto: string;
+// }
+// ```
+
+// Merged automatically.
+
+// # 2. Interface Extends
+// ## What it means
+// One interface inherits properties from another interface.
+
+// ```ts
+// interface Person {
+//   name: string;
+// }
+
+// interface Employee extends Person {
+//   salary: number;
+// }
+
+// const emp: Employee = {
+//   name: "Ganesh",
+//   salary: 50000
+// };
+// ```
+
+// ## Real-world Angular example
+// ```ts
+// interface ApiResponse {
+//   status: number;
+// }
+
+// interface UserResponse extends ApiResponse {
+//   data: string;
+// }
+// ```
+
+// Result:
+// ```ts
+// {
+//   status: number;
+//   data: string;
+// }
+// ```
+
+// # 3. Type Intersection
+// ## What it means
+
+// Combine multiple types using `&`
+// ```ts
+// type Person = {
+//   name: string;
+// };
+
+// type Employee = {
+//   salary: number;
+// };
+
+// type Staff = Person & Employee;
+// const staff: Staff = {
+//   name: "Ganesh",
+//   salary: 50000
+// };
+// ```
+
+// # Final Comparison Table (VERY IMPORTANT FOR INTERVIEW)
+// | Feature      | Declaration Merging  | Interface Extends   | Type Intersection  |
+// | ------------ | -------------------- | ------------------- | ------------------ |
+// | How it works | Same name auto merge | One extends another | Combine using &    |
+// | Keyword      | none                 | extends             | &                  |
+// | Works with   | interface only       | interface only      | type and interface |
+// | Automatic    | Yes                  | No                  | No                 |
+// | Control      | Less control         | Full control        | Full control       |
+// | Best use     | Library / large apps | Inheritance         | Flexible combining |
+
+// # Visual Understanding
+// Declaration merging:
+// ```ts
+// interface A { name: string }
+// interface A { age: number }
+
+// // Result auto:
+// interface A { name: string; age: number }
+// ```
+
+// Interface extends:
+// ```ts
+// interface A { name: string }
+
+// interface B extends A {
+//   age: number;
+// }
+// ```
+
+// Type intersection:
+// ```ts
+// type A = { name: string }
+// type B = { age: number }
+
+// type C = A & B
+// ```
+
+
+// # Interview best answer (simple)
+// Declaration merging automatically combines interfaces with same name.
+// Interface extends is used to inherit properties from another interface.
+// Type intersection combines multiple types using `&`.
+
+// # Angular recommendation (best practice)
+// ✔ Use **interface extends** for API models
+// ✔ Use **type intersection** for complex combinations
+// ✔ Avoid declaration merging unless necessary
 
 //  13. Modules vs Namespaces
 // Modern apps use modules:
