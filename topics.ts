@@ -13,6 +13,27 @@
 // 9. Readonly
 // 10. Generic services in Angular
 
+| Priority | Topic | What you must know |
+|---|---|---|
+| 🔴 | **Types & inference** | annotations, inference, `any`, `unknown`, `never`, `void` |
+| 🔴 | **Interface vs Type** | differences, extension, intersection, when to use |
+| 🔴 | **Union & Intersection** | `A \| B`, `A & B`, practical API/model examples |
+| 🔴 | **Type narrowing** | `typeof`, `in`, `instanceof`, custom type guards |
+| 🔴 | **Generics** | generic functions, interfaces, classes, constraints |
+| 🔴 | **Utility Types** | `Partial`, `Required`, `Pick`, `Omit`, `Record`, `Readonly` |
+| 🔴 | **Classes / OOP** | access modifiers, abstract, inheritance, implements |
+| 🔴 | **Enums / literal types** | enum vs string union |
+| 🟡 | **`keyof` / `typeof`** | extracting keys/types |
+| 🟡 | **Indexed access** | `User['name']`, `T[K]` |
+| 🟡 | **Generic constraints** | `<T extends ...>` |
+| 🟡 | **Mapped Types** | `[K in keyof T]` |
+| 🟡 | **Conditional Types** | `T extends U ? X : Y` |
+| 🟡 | **`infer`** | understand basic use; don't go too deep |
+| 🟡 | **Function typing** | optional/default/rest params, overloads |
+| 🟡 | **`as const` / `satisfies`** | modern TS type-safety patterns |
+| 🟢 | **Decorators** | understand because Angular uses them |
+| 🟢 | **Namespaces / declaration merging** | awareness only |
+
 
 // ===== Basic =======
 // 1. Why TypeScript when we already have JavaScript?
