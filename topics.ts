@@ -13,26 +13,28 @@
 // 9. Readonly
 // 10. Generic services in Angular
 
-| Priority | Topic | What you must know |
-|---|---|---|
-| 🔴 | **Types & inference** | annotations, inference, `any`, `unknown`, `never`, `void` |
-| 🔴 | **Interface vs Type** | differences, extension, intersection, when to use |
-| 🔴 | **Union & Intersection** | `A \| B`, `A & B`, practical API/model examples |
-| 🔴 | **Type narrowing** | `typeof`, `in`, `instanceof`, custom type guards |
-| 🔴 | **Generics** | generic functions, interfaces, classes, constraints |
-| 🔴 | **Utility Types** | `Partial`, `Required`, `Pick`, `Omit`, `Record`, `Readonly` |
-| 🔴 | **Classes / OOP** | access modifiers, abstract, inheritance, implements |
-| 🔴 | **Enums / literal types** | enum vs string union |
-| 🟡 | **`keyof` / `typeof`** | extracting keys/types |
-| 🟡 | **Indexed access** | `User['name']`, `T[K]` |
-| 🟡 | **Generic constraints** | `<T extends ...>` |
-| 🟡 | **Mapped Types** | `[K in keyof T]` |
-| 🟡 | **Conditional Types** | `T extends U ? X : Y` |
-| 🟡 | **`infer`** | understand basic use; don't go too deep |
-| 🟡 | **Function typing** | optional/default/rest params, overloads |
-| 🟡 | **`as const` / `satisfies`** | modern TS type-safety patterns |
-| 🟢 | **Decorators** | understand because Angular uses them |
-| 🟢 | **Namespaces / declaration merging** | awareness only |
+ Priority  Topic  What you must know 
+---------
+ 🔴  Types & inference  annotations, inference, `any`, `unknown`, `never`, `void` 
+ 🔴  Interface vs Type  differences, extension, intersection, when to use 
+ 🔴  Union & Intersection  `A \ B`, `A & B`, practical API/model examples 
+ 🔴  Type narrowing  `typeof`, `in`, `instanceof`, custom type guards 
+ 🔴  Generics  generic functions, interfaces, classes, constraints 
+ 🔴  Utility Types  `Partial`, `Required`, `Pick`, `Omit`, `Record`, `Readonly` 
+ 🔴  Classes / OOP  access modifiers, abstract, inheritance, implements 
+ 🔴  Enums / literal types  enum vs string union 
+
+ 🟡  `keyof` / `typeof`  extracting keys/types 
+ 🟡  Indexed access  `User['name']`, `T[K]` 
+ 🟡  Generic constraints  `<T extends ...>` 
+ 🟡  Mapped Types  `[K in keyof T]` 
+ 🟡  Conditional Types  `T extends U ? X : Y` 
+ 🟡  `infer`  understand basic use; don't go too deep 
+ 🟡  Function typing  optional/default/rest params, overloads 
+ 🟡  `as const` / `satisfies`  modern TS type-safety patterns 
+
+ 🟢  Decorators  understand because Angular uses them 
+ 🟢  Namespaces / declaration merging  awareness only 
 
 
 // ===== Basic =======
@@ -42,8 +44,8 @@
 //    name = 10; // ❌ Error: Type 'number' is not assignable to type 'string'
 
 //  1️⃣ Why TypeScript when we already have JavaScript?
-// TypeScript adds **types** on top of JavaScript.
-// It helps catch errors **before running the code**.
+// TypeScript adds types on top of JavaScript.
+// It helps catch errors before running the code.
 
 //  Why we need it:
 // * Detects errors at compile time
@@ -72,7 +74,7 @@
 // 👉 TypeScript prevents bugs early.
 
 //  2️⃣ What are Enums in TypeScript?
-// Enums define a **fixed set of named values**.
+// Enums define a fixed set of named values.
 //  Example:
 // ```ts
 // enum Role {
@@ -94,7 +96,7 @@
 // 👉 Makes code readable and prevents invalid values.
 
 //  3️⃣ What is a Tuple in TypeScript?
-// A tuple is an **array with fixed types and fixed order**.
+// A tuple is an array with fixed types and fixed order.
 //  Example:
 // ```ts
 // let user: [string, number];
@@ -149,7 +151,7 @@
 // ```
 
 //  `never`
-// * Represents values that **never occur**
+// * Represents values that never occur
 // * Used in functions that never return
 
 // ```ts
@@ -189,7 +191,7 @@
 // * Can define unions, tuples, primitives
 
 // ```ts
-// type ID = string | number;
+// type ID = string  number;
 // ```
 
 //  Real Interview Answer:
@@ -246,10 +248,10 @@
 
 // ========== Advanced TypeScript Concepts ==========
 //  1. Generics (Reusable types)
-// **Concept:**
+// Concept:
 // Generics allow you to write reusable and type-safe code.
 
-// **Without Generics**
+// Without Generics
 // ```ts
 // function getValue(value: any): any {
 //   return value;
@@ -257,7 +259,7 @@
 // ```
 // Problem: no type safety.
 
-// **With Generics**
+// With Generics
 // ```ts
 // function getValue<T>(value: T): T {
 //   return value;
@@ -267,7 +269,7 @@
 // getValue<number>(10);
 // ```
 
-// **Real example (API response)**
+// Real example (API response)
 // ```ts
 // interface ApiResponse<T> {
 //   data: T;
@@ -281,18 +283,18 @@
 // ```
 
 
-//  2. Union Types (`|`)
+//  2. Union Types (``)
 // Allows multiple types.
 // ```ts
-// let id: string | number;
+// let id: string  number;
 
 // id = 10;
 // id = "EMP101";
 // ```
 
-// **Real example**
+// Real example
 // ```ts
-// function printId(id: string | number) {
+// function printId(id: string  number) {
 //   console.log(id);
 // }
 // ```
@@ -319,7 +321,7 @@
 // Used to check type safely.
 
 // ```ts
-// function printValue(value: string | number) {
+// function printValue(value: string  number) {
 //   if (typeof value === "string") {
 //     console.log(value.toUpperCase());
 //   } else {
@@ -337,10 +339,10 @@
 // }
 
 // type UserKeys = keyof User;
-// // "id" | "name"
+// // "id"  "name"
 // ```
 
-// **Real example**
+// Real example
 // ```ts
 // function getValue(obj: User, key: keyof User) {
 //   return obj[key];
@@ -444,7 +446,7 @@
 //  12. Declaration Merging
 
 // ## What it means
-// If multiple interfaces have the **same name**, TypeScript will **combine them into one interface automatically**.
+// If multiple interfaces have the same name, TypeScript will combine them into one interface automatically.
 
 // interface User {
 //   name: string;
@@ -607,14 +609,14 @@
 // ```
 
 // # Final Comparison Table (VERY IMPORTANT FOR INTERVIEW)
-// | Feature      | Declaration Merging  | Interface Extends   | Type Intersection  |
-// | ------------ | -------------------- | ------------------- | ------------------ |
-// | How it works | Same name auto merge | One extends another | Combine using &    |
-// | Keyword      | none                 | extends             | &                  |
-// | Works with   | interface only       | interface only      | type and interface |
-// | Automatic    | Yes                  | No                  | No                 |
-// | Control      | Less control         | Full control        | Full control       |
-// | Best use     | Library / large apps | Inheritance         | Flexible combining |
+//  Feature       Declaration Merging   Interface Extends    Type Intersection  
+//  ------------  --------------------  -------------------  ------------------ 
+//  How it works  Same name auto merge  One extends another  Combine using &    
+//  Keyword       none                  extends              &                  
+//  Works with    interface only        interface only       type and interface 
+//  Automatic     Yes                   No                   No                 
+//  Control       Less control          Full control         Full control       
+//  Best use      Library / large apps  Inheritance          Flexible combining 
 
 // # Visual Understanding
 // Declaration merging:
@@ -650,8 +652,8 @@
 // Type intersection combines multiple types using `&`.
 
 // # Angular recommendation (best practice)
-// ✔ Use **interface extends** for API models
-// ✔ Use **type intersection** for complex combinations
+// ✔ Use interface extends for API models
+// ✔ Use type intersection for complex combinations
 // ✔ Avoid declaration merging unless necessary
 
 //  13. Modules vs Namespaces
@@ -703,7 +705,7 @@
 //  Question 2
 // Output?
 // ```ts
-// type A = string | number;
+// type A = string  number;
 // type B = string & number;
 // ```
 
@@ -780,7 +782,7 @@
 
 //  Question 8
 // ```ts
-// type Status = "success" | "error";
+// type Status = "success"  "error";
 // ```
 
 // Called string literal type.
@@ -809,9 +811,9 @@
 
 //  What is Function Overloading?
 // Function overloading means:
-// 👉 **Same function name**
-// 👉 But **different input types**
-// 👉 And **different behavior**
+// 👉 Same function name
+// 👉 But different input types
+// 👉 And different behavior
 
 //  Real-time example (Calculator)
 // Sometimes you add numbers:
@@ -959,10 +961,10 @@
 // Now cannot change accidentally.
 
 // # Interview answer (simple one line)
-// **Function overloading:**
+// Function overloading:
 // "Same function name with different input types."
 
-// **as const:**
+// as const:
 // "as const makes object readonly and fixes values so they cannot be modified."
 
 // Real Interview Questions asked in companies like TCS, Infosys, Accenture
