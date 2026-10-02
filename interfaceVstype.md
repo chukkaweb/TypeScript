@@ -17,7 +17,6 @@ Both `interface` and `type` can define the shape of an object, but they have som
 
 ## 1. Basic Example
 ### Interface
-
 ```ts
 interface User {
   id: number;
@@ -31,22 +30,16 @@ const user: User = {
 ```
 
 ### Type
-
 ```ts
 type User = {
   id: number;
   name: string;
 };
 ```
-
 For a simple object structure, both work similarly.
 
-
-
 # 2. Extending Types
-
 ## Interface → `extends`
-
 ```ts
 interface Animal {
   name: string;
@@ -55,7 +48,6 @@ interface Animal {
 interface Bear extends Animal {
   honey: boolean;
 }
-
 const bear: Bear = {
   name: "Brown Bear",
   honey: true
@@ -63,7 +55,6 @@ const bear: Bear = {
 ```
 
 ## Type → Intersection `&`
-
 ```ts
 type Animal = {
   name: string;
@@ -75,19 +66,14 @@ type Bear = Animal & {
 ```
 
 ### Easy to Remember
-
 ```text
 interface → extends
 
 type → &
 ```
 
-
-
 # 3. Declaration Merging
-
 One important feature of `interface` is **declaration merging**.
-
 If interfaces with the same name are declared in the same scope, TypeScript can merge their compatible properties.
 
 ```ts
@@ -128,69 +114,50 @@ type User = {
 // ❌ Duplicate identifier 'User'
 ```
 
-### Interview Point
-
+### Learning Point
 > `interface` supports declaration merging, while `type` aliases do not.
 
-
-
 # 4. Type Is More Flexible
-
 A `type` alias can represent more than just object structures.
 
 ## Primitive Alias
-
 ```ts
 type ID = string;
 ```
-
 ## Union
-
 ```ts
 type ID = string | number;
 ```
 
 Another common example:
-
 ```ts
 type ConnectionState =
   | "connecting"
   | "connected"
   | "disconnected";
 ```
-
 This is especially useful when only specific values should be accepted.
 
 ```ts
 let status: ConnectionState;
-
 status = "connected"; // ✅
 status = "failed";    // ❌
 ```
 
-
-
 # 5. Tuples
-
 `type` can directly define tuples.
-
 ```ts
 type Point2D = [number, number];
-
 const location: Point2D = [10, 20];
 ```
 
-
-
 # 6. Class Contracts
-
 Interfaces are commonly used to define contracts that classes implement.
 
 ```ts
 interface Employee {
   id: number;
   name: string;
-
   getDetails(): string;
 }
 
@@ -199,19 +166,14 @@ class Developer implements Employee {
     public id: number,
     public name: string
   ) {}
-
   getDetails(): string {
     return `${this.id} - ${this.name}`;
   }
 }
 ```
 
-
-
 # 7. When Should I Use Interface?
-
 Prefer `interface` when:
-
 - Defining object models
 - Defining API contracts
 - Defining class contracts
@@ -220,24 +182,18 @@ Prefer `interface` when:
 - You expect an object contract to be extended
 
 Example:
-
 ```ts
 interface ApiResponse {
   status: number;
   message: string;
 }
-
 interface UserResponse extends ApiResponse {
   data: User[];
 }
 ```
 
-
-
 # 8. When Should I Use Type?
-
 Prefer `type` when you need:
-
 - Union types
 - Intersection types
 - Primitive aliases
@@ -248,13 +204,11 @@ Prefer `type` when you need:
 - More complex type transformations
 
 Example:
-
 ```ts
 type Status = "loading" | "success" | "error";
 ```
 
 Intersection:
-
 ```ts
 type User = {
   name: string;
@@ -267,12 +221,8 @@ type Admin = {
 type AdminUser = User & Admin;
 ```
 
-
-
 # Angular Real-World Example
-
 For straightforward API/domain models, an interface is often clear:
-
 ```ts
 interface User {
   id: number;
@@ -286,7 +236,6 @@ getUsers(): Observable<User[]> {
 ```
 
 For application states, a union type can be very useful:
-
 ```ts
 type RequestStatus =
   | "idle"
@@ -305,14 +254,13 @@ type UserWithPermissions = User & {
 
 
 
-# Interview Answer
+#  Answer
 
 A simple senior-level answer:
 
 > Both `interface` and `type` can define object structures.  
 > I generally use `interface` for extendable object contracts and `type` when I need unions, intersections, tuples, literal types, or more advanced type transformations.  
 > One important difference is that interfaces support declaration merging, while type aliases do not.
-
 
 
 # Quick Revision
@@ -338,7 +286,5 @@ Advanced type transformations
 ```
 
 ## Easy Rule
-
 **Object contract → `interface` is often a good choice**
-
 **Union / tuple / advanced type composition → `type`**
